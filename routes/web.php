@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware'=>'web'],function(){
+
+	Route::get('/','IndexController@execute')->name('home');
+	Route::get('/currency/{alias}','CurrencyController@execute')->name('currency');
 });

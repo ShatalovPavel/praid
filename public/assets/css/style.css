@@ -1,0 +1,17 @@
+#navigation{
+	margin-top:15px;
+}
+.clndr{
+	font-size:30px;
+	cursor: pointer;
+}
+.list-group li:hover{
+	color:blue;
+	cursor: pointer;
+}
+.list-group li button{
+	margin-top:5px; 
+}
+#myChart{
+	margin-top: 25px;
+}
