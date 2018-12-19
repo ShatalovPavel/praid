@@ -16,3 +16,7 @@ Route::group(['middleware'=>'web'],function(){
 	Route::get('/','IndexController@execute')->name('home');
 	Route::get('/currency/{alias}','CurrencyController@execute')->name('currency');
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
