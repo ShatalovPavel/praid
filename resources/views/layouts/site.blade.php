@@ -18,17 +18,7 @@
   <div class="container" id='navigation'>
     <div class="row">
       <div class="col-9">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Доллар</a>
-         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Евро</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Рубль</a>
-          </li>
-        </ul>
+        @yield('menu')
         <canvas id="myChart"></canvas>
 
       </div>
