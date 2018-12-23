@@ -18,7 +18,7 @@ class IndexController extends Controller
     	$startDate = date("Ymd", mktime(0, 0, 0, date('m'), date('d') - $day, date('Y')));
     	$endDate = date("Ymd"); 
     	$currency = Currency::where('name',mb_strtolower($nameCurrency))->get();
-    	$currencyID=$currency[0]->id;
+    	$currencyID = $currency[0]->id;
 
     	$priceCurrentID = Price::pluck('currency_id')->first();
     		
@@ -71,12 +71,20 @@ class IndexController extends Controller
     		
 
     }
-    public function execute(){
-    	
-    	if(view()->exists('layouts.site')){
+    public function chart(){
+    		$nameCurrency = 'USD';
+    		$currency = Currency::where('name',mb_strtolower($nameCurrency))->get();
+    		$currencyID = $currency[0]->id;
     		$currencies = Currency::all();
+    		$chart = Price::where('currency_id',$currencyID)->get();
     		
-    	}
+    		return  response()->json($chart);
+    		
+    }
+    public function execute(){
+    		
+    		$currencies = Currency::all();
+
     	return view('site.index',array('currencies' => $currencies));
     }
 

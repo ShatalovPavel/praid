@@ -1,26 +1,33 @@
-var ctx = document.getElementById('myChart').getContext('2d');
+var url = "/chart";
+        var dates = new Array();
+        var prices = new Array();
 
+        $(document).ready(function(){
+          $.get(url, function(response){
 
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+            response.forEach(function(data){
 
-    // The data for our dataset
-    data: {
-        labels: ["18 декабря 2018", "19 декабря 2018", "20 декабря 2018"],
-        datasets: [{
-            label: "Высокий курс",
-            //backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [28.3000,28.200,28.100],
-        }]
-    },
+                dates.push(data.Data);
+                prices.push(data.price);
 
-    // Configuration options go here
-    options: {
-      legend:{
-        display:false,
-      }
-
-    }
-});
+            });
+            var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                      labels:dates,
+                      datasets: [{
+                          label: 'Высокий курс',
+                          borderColor: 'rgb(255, 99, 132)',
+                          data: prices,
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      legend:{
+                        display:false,
+                    }
+                  }
+              });
+          });
+        });

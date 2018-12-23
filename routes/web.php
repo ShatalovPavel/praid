@@ -14,6 +14,7 @@
 Route::group(['middleware'=>'web'],function(){
 
 	Route::get('/','IndexController@execute')->name('home');
+	Route::get('/chart','IndexController@chart')->name('chart');
 	Route::get('/currency/{alias}','CurrencyController@execute')->name('currency');
 });
 

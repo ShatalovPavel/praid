@@ -5,3 +5,9 @@
 	@include('site.menu')
 
 @endsection
+
+@section('chart')
+
+	@include('site.chart')
+
+@endsection
