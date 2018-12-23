@@ -8,6 +8,7 @@ class Price extends Model
 {
     //
     public $table = 'prices';
+    protected $fillable = ['price','currency_id','Data'];
 
 
     public function currency()
