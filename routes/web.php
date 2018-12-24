@@ -14,10 +14,14 @@
 Route::group(['middleware'=>'web'],function(){
 
 	Route::get('/','IndexController@execute')->name('home');
-	//json link
 	Route::get('/chart','IndexController@chart');
 	Route::get('/currency/{alias}','CurrencyController@execute')->name('currency');
 	Route::get('/currency/{alias}/chart','CurrencyController@chart');
+	Route::get('/currency/{alias}/{id}','PopperController@execute')->name('popper');
+	Route::get('/currency/{alias}/{id}/chart','PopperController@chart');
+	
+
+	
 });
 
 Route::group(['prefix' => 'admin'], function () {

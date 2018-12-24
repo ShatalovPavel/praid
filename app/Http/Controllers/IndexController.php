@@ -86,7 +86,14 @@ class IndexController extends Controller
     	$nameCurrency = 'USD';
     	$currencies = Currency::all();
 
-    	return view('site.index',array('currencies' => $currencies, 'nameCurrency' => $nameCurrency));
+         $GetDayForURL = array(
+                '5'=> 'за 5 дней',
+                '7'=> 'за 7 дней',
+                '10'=> 'за 10 дней',
+                'all'=> 'за все время',
+            );
+
+    	return view('site.index',array('currencies' => $currencies, 'nameCurrency' => $nameCurrency,'GetDayForURL' => $GetDayForURL));
     }
 
      

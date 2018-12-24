@@ -5,6 +5,11 @@
 	@include('site.menu')
 
 @endsection
+@section('popper')
+
+	@include('site.popper')
+
+@endsection
 
 @section('chart')
 

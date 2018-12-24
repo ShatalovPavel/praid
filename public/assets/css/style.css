@@ -9,7 +9,7 @@
 	color:blue;
 	cursor: pointer;
 }
-.list-group li button{
+.list-group li a{
 	margin-top:5px; 
 }
 #myChart{

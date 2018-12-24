@@ -1,4 +1,6 @@
-        var url = window.location.href+"/chart";
+        var url = window.location.href;
+        url = window.location.href.replace(window.location.search,'');
+        url = url+'/chart';
         var dates = new Array();
         var prices = new Array();
 
