@@ -14,8 +14,10 @@
 Route::group(['middleware'=>'web'],function(){
 
 	Route::get('/','IndexController@execute')->name('home');
-	Route::get('/chart','IndexController@chart')->name('chart');
+	//json link
+	Route::get('/chart','IndexController@chart');
 	Route::get('/currency/{alias}','CurrencyController@execute')->name('currency');
+	Route::get('/currency/{alias}/chart','CurrencyController@chart');
 });
 
 Route::group(['prefix' => 'admin'], function () {

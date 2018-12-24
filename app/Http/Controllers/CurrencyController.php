@@ -3,26 +3,25 @@
 namespace Praid\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Praid\Currency;
 use Praid\Price;
 use GuzzleHttp\Client;
 
-class IndexController extends Controller
+class CurrencyController extends Controller
 {
     //
-    public function __construct(){
-    	$nameCurrency = 'USD';
-    	$day = 14;
+    public function execute($alias){
 
+    	$nameCurrency = $alias;
+    	$day=14;
     	$startDate = date("Ymd", mktime(0, 0, 0, date('m'), date('d') - $day, date('Y')));
     	$endDate = date("Ymd"); 
     	$currency = Currency::where('name',mb_strtolower($nameCurrency))->get();
-
     	$currencyID = $currency[0]->id;
 
     	$priceCurrentID = Price::where('currency_id',$currencyID)->first();
-    		
+    	$idPriceCurrency = $priceCurrentID->currency_id;
+    	
     		if(empty($priceCurrentID)){
     			$data = $this->getDataCurrency($nameCurrency,$startDate,$endDate,$day);
     			$dates = $this->getDataDate($day);
@@ -45,9 +44,8 @@ class IndexController extends Controller
     		    $currentDay = $this->getDataDate($day);
     		    $dates = Price::pluck('Data');
     			$data = $this->getDataCurrency($nameCurrency,FALSE,$endDate,FALSE);
-
     			foreach ($dates as $date) {
-    				if($date == $currentDay){
+    				if($date == $currentDay && $currencyID != $idPriceCurrency){
     					$flag=FALSE;
     					break;
     				}
@@ -61,7 +59,6 @@ class IndexController extends Controller
     						'currency_id' => $currencyID,
     						'Data' => $currentDay 
     				];
-    				
     				$price = new Price();
     				$price->fill($input);
     				$price->save();
@@ -70,25 +67,21 @@ class IndexController extends Controller
 
     		}
     
+
+    		
+    		$currencies = Currency::all();
+    	return view('site.index',array('currencies' => $currencies));
     }
-    public function chart(){
-    		$nameCurrency = 'USD';
+
+    public function chart($alias){
+    		$nameCurrency = $alias;
     		$currency = Currency::where('name',mb_strtolower($nameCurrency))->get();
     		$currencyID = $currency[0]->id;
     		$currencies = Currency::all();
     		$chart = Price::where('currency_id',$currencyID)->latest('Data')->limit(3)->get();
-    		
+
     		return  response()->json($chart);
     		
     }
-    public function execute(){
-
-    	$nameCurrency = 'USD';
-    	$currencies = Currency::all();
-
-    	return view('site.index',array('currencies' => $currencies, 'nameCurrency' => $nameCurrency));
-    }
-
-     
     
 }

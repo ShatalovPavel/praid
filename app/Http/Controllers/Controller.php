@@ -12,6 +12,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+
+
    public function getDataCurrency($nameCurrency,$startDate=FALSE,$endDate,$day=FALSE){
      	
      	$rates= array();
@@ -70,5 +72,5 @@ class Controller extends BaseController
     	}
 
     }
-   
+
 }
