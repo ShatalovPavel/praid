@@ -20,7 +20,7 @@ class CurrencyController extends Controller
     	$currencyID = $currency[0]->id;
 
     	$priceCurrentID = Price::where('currency_id',$currencyID)->first();
-    	$idPriceCurrency = $priceCurrentID->currency_id;
+    	
     	
     		if(empty($priceCurrentID)){
     			$data = $this->getDataCurrency($nameCurrency,$startDate,$endDate,$day);
@@ -42,10 +42,10 @@ class CurrencyController extends Controller
     			$day=1;
     			$flag=FALSE;
     		    $currentDay = $this->getDataDate($day);
-    		    $dates = Price::pluck('Data');
+    		    $dates = Price::pluck('Data','currency_id');
     			$data = $this->getDataCurrency($nameCurrency,FALSE,$endDate,FALSE);
-    			foreach ($dates as $date) {
-    				if($date == $currentDay && $currencyID != $idPriceCurrency){
+    			foreach ($dates  as $key => $date) {
+    				if($date == $currentDay && $key==$currencyID){
     					$flag=FALSE;
     					break;
     				}
