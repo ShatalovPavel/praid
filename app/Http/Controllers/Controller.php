@@ -34,20 +34,6 @@ class Controller extends BaseController
     				
      		}
      		return $rates;
-
-     	}
-     	else{
-
-     		$linkKeyEndDate ='https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode='.$nameCurrency.'&date='.$endDate.'&json'; 
-     		$client = new Client([
-    		'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
-    	]);
-    	$response = $client->request('GET',$linkKeyEndDate);
-    	$data = $response->getBody();
-    	
-    	$data = json_decode($data);
-
-    		return $data;
      	}	
     }
 

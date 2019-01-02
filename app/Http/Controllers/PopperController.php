@@ -11,6 +11,10 @@ use Validator;
 class PopperController extends Controller
 {
     //
+    public function __construct(Request $request){
+           
+    
+    }
 
     public function execute($alias,$id, Request $request){
     	$nameCurrency = $alias;
