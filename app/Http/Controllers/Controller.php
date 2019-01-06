@@ -20,7 +20,6 @@ class Controller extends BaseController
 
      	if($startDate){
      		while($startDate!=$endDate){
-     				$day--;
      				$linkKeyEndDate ='https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode='.$nameCurrency.'&date='.$startDate.'&json';
      				$client = new Client([
     								'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
@@ -31,6 +30,7 @@ class Controller extends BaseController
     				$item =  $data[0]->rate;
     				array_push($rates,round($item,2));
     				$startDate = date("Ymd", mktime(0, 0, 0, date('m'), date('d') - $day, date('Y')));
+                    $day--;
     				
      		}
      		return $rates;

@@ -23,6 +23,7 @@ class CurrencyController extends Controller
             if($priceCurrentID->count()==0){
                 $data = $this->getDataCurrency($nameCurrency,$startDate,$endDate,$day);
                 $dates = $this->getDataDate($day);
+               array_reverse($dates);
                 for ($i=0; $i <count($data); $i++) { 
                     $input = [
                         'price' => $data[$i],
