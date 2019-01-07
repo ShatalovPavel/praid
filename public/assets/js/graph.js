@@ -1,6 +1,13 @@
         var url = window.location.href;
-        url = window.location.href.replace(window.location.search,'');
-        url = url+'/chart';
+        if(url.indexOf("?") === -1){
+          url = window.location.href.replace(window.location.search,'');
+          url = url+'/chart';
+        }
+        else{
+            url = window.location.href.replace(window.location.search,'');
+            url = url+'/chart?dates='+ new URLSearchParams(window.location.search).get('dates');
+        }
+      
         var dates = new Array();
         var prices = new Array();
 

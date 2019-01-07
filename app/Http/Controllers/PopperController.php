@@ -11,8 +11,21 @@ use Validator;
 class PopperController extends Controller
 {
     //
+    protected $StartDate;
+    protected $EndDate;
+
     public function __construct(Request $request){
-           
+
+        $data = $request->query('dates');
+        if(!empty($data)){
+            $date = explode('-',$data);
+            $date[0]=date_create(trim($date[0]));
+            $date[1]=date_create(trim($date[1]));
+            $this->StartDate = date_format($date[0],'Y-m-d');
+            $this->EndDate = date_format($date[1],'Y-m-d');
+
+
+        }
     
     }
 
@@ -32,6 +45,7 @@ class PopperController extends Controller
 
 
     public function chart($alias,$id) {
+
     		$nameCurrency = $alias;
     		$limit=$id;
     		$currency = Currency::where('name',mb_strtolower($nameCurrency))->get();
@@ -41,6 +55,9 @@ class PopperController extends Controller
     			$chart = Price::where('currency_id',$currencyID)->latest('Data')->get();
     		
     		}
+            else if($limit=='dates'){
+                $chart = Price::where('currency_id',$currencyID)->where('Data','>=',$this->StartDate)->where('Data','<=',$this->EndDate)->get();
+            }
     		else{
     			$chart = Price::where('currency_id',$currencyID)->latest('Data')->limit($limit)->get();
     			
